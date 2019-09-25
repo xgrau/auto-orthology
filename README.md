@@ -29,4 +29,16 @@ Too strict. It'll force the species tree onto every single subtree and add putat
 
 ## UPHO
 
-That:
+### Setup
+
+1. Download UPHO:
+
+```
+git clone https://github.com/ballesterus/UPhO.git
+```
+
+2. Run UPHO:
+
+```
+python2 /home/xavi/Programes/UPhO/UPhO.py -d _ -in tree/adar.newick -iP -ouT
+```
