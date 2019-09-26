@@ -4,9 +4,15 @@ Scripts for automatic orthology assignment, proves.
 
 ## ETE3
 
+### Plan
+
+This is my plan, my only plan, the end.
+
+### Strategies
+
 Two strategies available [here](http://etetoolkit.org/docs/latest/tutorial/tutorial_phylogeny.html#detecting-evolutionary-events).
 
-### Species overlap
+#### Species overlap
 
 See [Huerta-Cepas 2007](https://genomebiology.biomedcentral.com/articles/10.1186/gb-2007-8-6-r109). 
 
@@ -24,9 +30,9 @@ Script `ete-proves/test_v02_speciesoverlap.py` implements this method with a tre
 D Anocul_ACUA003793-RA_2-103,Anomin_AMIN009728-RA_330-722 <====> Anocul_ACUA021577-RA_55-316
 ```
 
-### Strict tree reconciliation
+#### Strict tree reconciliation
 
-Too strict. It'll force the species tree onto every single subtree and add putative losses; which looks great in theory but requires a degree of compliance between gene trees and species trees that is unreasonable even for single-copy gene families. Won't for large multigene families.
+Too strict. It'll force the species tree onto every possible subtree and add putative losses; which looks great in theory but requires a degree of compliance between gene trees and species trees that is unreasonable even for single-copy gene families. Won't for large multigene families.
 
 ## UPHO
 
