@@ -16,7 +16,8 @@ See [Huerta-Cepas 2007](https://genomebiology.biomedcentral.com/articles/10.1186
 
 Script `ete-proves/test_v02_speciesoverlap.py` implements this method with a tree of ADAR enzymes (multigene, paralogy in animals, few outgroups). Observations:
 
-* All identified events make sense (if it says something is )
+* All identified events make sense (paralogs, orthologs) for ADAR.
+* False negatives?
 
 
 ```
@@ -42,3 +43,13 @@ git clone https://github.com/ballesterus/UPhO.git
 ```
 python2 /home/xavi/Programes/UPhO/UPhO.py -d _ -in tree/adar.newick -iP -ouT
 ```
+
+Parameters:
+
+* `-iP` to include inparalogs in the orthplogy groups
+* `-m` to specify the minimum number of OTUs in an orthogroup
+* `-ouT` Write orthologous branches to newick file
+* `-S` minimum support value for orthology evaluation
+* `-d` delimiter, default is `|`, but if you use `_` it seems to work fine (even if there are more than one such characters per name)
+
+Problem: highly atomised for some reason! There's no way to tweak granularity.
