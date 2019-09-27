@@ -1,0 +1,11 @@
+2019-09-27 16:25:18,263 [INFO ]	Phylogeny = family_ADAR/adar.newick
+2019-09-27 16:25:18,264 [INFO ]	Nodes = 284
+2019-09-27 16:25:18,267 [INFO ]	Tree is rooted, pass
+2019-09-27 16:25:18,602 [INFO ]	Species overlap score = 0.00, num speciation events = 8308
+2019-09-27 16:25:18,911 [INFO ]	Species overlap score = 0.01, num speciation events = 8308
+2019-09-27 16:25:19,221 [INFO ]	Species overlap score = 0.05, num speciation events = 10541
+2019-09-27 16:25:19,535 [INFO ]	Species overlap score = 0.10, num speciation events = 12919
+2019-09-27 16:25:19,907 [INFO ]	Species overlap score = 0.50, num speciation events = 21298
+2019-09-27 16:25:19,909 [INFO ]	Num nodes = 284
+2019-09-27 16:25:19,910 [INFO ]	Num species = 90
+2019-09-27 16:25:19,910 [INFO ]	Done!

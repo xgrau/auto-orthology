@@ -18,7 +18,7 @@ seq1	seq3	S	100.0	0.01
 findog_s01_ETEnet_v03_27set19.py <input newick> <output prefix>
 ```
 
-2. **`findog_s02_tabulate_v01.R`** (R 3.6.1): Assign each component of this network of orthologs to one or more orthogroups. In `R`?
+2. **`findog_s02_tabulate_v01.R`** (R 3.6.1): Assign each component of this network of orthologs to one or more orthogroups. Requires `igraph`.
 
 Required inputs:
 

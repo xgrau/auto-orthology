@@ -1,0 +1,11 @@
+2019-09-27 16:23:19,858 [INFO ]	Phylogeny = family_SET/set_raxml.newick
+2019-09-27 16:23:19,862 [INFO ]	Nodes = 2449
+2019-09-27 16:23:19,876 [INFO ]	Tree is unrooted, apply midpoint root
+2019-09-27 16:23:25,666 [INFO ]	Species overlap score = 0.00, num speciation events = 24425
+2019-09-27 16:23:31,529 [INFO ]	Species overlap score = 0.01, num speciation events = 26825
+2019-09-27 16:23:37,460 [INFO ]	Species overlap score = 0.05, num speciation events = 84774
+2019-09-27 16:23:43,521 [INFO ]	Species overlap score = 0.10, num speciation events = 139773
+2019-09-27 16:23:50,803 [INFO ]	Species overlap score = 0.50, num speciation events = 543617
+2019-09-27 16:23:50,807 [INFO ]	Num nodes = 2449
+2019-09-27 16:23:50,808 [INFO ]	Num species = 104
+2019-09-27 16:23:50,808 [INFO ]	Done!

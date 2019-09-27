@@ -9,8 +9,7 @@ import logging
 # phy_fn = "set_raxml.newick"
 # out_fn = "set_raxml.out_ete"
 phy_fn = sys.argv[1]
-out_fn = sys.argv[2]
-
+out_fn = "%s.out_ete" % phy_fn.split(sep=".")[0]
 
 # logging
 logging.basicConfig(
@@ -21,7 +20,7 @@ logging.basicConfig(
 
 
 # load input
-phy = ete3.PhyloTree(phy_fn)
+phy = ete3.PhyloTree("%s" % (phy_fn))
 logging.info("Phylogeny = %s" % phy_fn)
 logging.info("Nodes = %i" % len(phy))
 
