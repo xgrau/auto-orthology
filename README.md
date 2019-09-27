@@ -22,9 +22,9 @@ findog_s01_ETEnet_v03_27set19.py <input newick> <output prefix>
 
 Required inputs:
 
-* phylogeny, newick. Should include supports.
-* dictionary linking specific sequences from one specie (or more?) to gene names (orthogroups that'll be tabulated)
-* list of species to create report (so as to include also species that are not present in the phylogeny).
+* `set_raxml.newick`: phylogeny, newick, includes supports.
+* `set_Hsap_names.dict`: dictionary linking specific sequences from one specie (or more?) to gene names (orthogroups that'll be tabulated)
+* `TODO`: list of species to create report (so as to include also species that are not present in the phylogeny).
 
 Final outputs (maybe):
 
