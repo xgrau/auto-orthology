@@ -56,7 +56,8 @@ for soi in [0,0.01,0.05,0.1,0.5] :
 	evou    = np.empty((len(evev)*1000, 5), dtype="object")
 	evou[:] = np.nan
 	# loop through in and out seqs, create edge table with orthologous events
-	for n,ev in enumerate(evev):
+	n = 0
+	for ev in evev:
 		if ev.etype == "S":
 			for ii in ev.in_seqs:
 				for oi in ev.out_seqs:
@@ -65,6 +66,7 @@ for soi in [0,0.01,0.05,0.1,0.5] :
 					evou[n,2] = ev.etype
 					evou[n,3] = ev.branch_supports[0]
 					evou[n,4] = ev.sos
+					n = n + 1
 
 	evou_d = pd.DataFrame(evou).dropna()
 	evou_d.columns = ["in_gene","out_gene","ev_type","branch_support","sos"]
@@ -72,7 +74,6 @@ for soi in [0,0.01,0.05,0.1,0.5] :
 	# save edges
 	evou_d.to_csv("%s.sos_%.2f.edges" % (out_fn, soi), sep="\t", index=False)
 	logging.info("Species overlap score = %.2f, num speciation events = %i" % (soi,evou_d.shape[0]))
-
 
 
 # save nodes

@@ -2,17 +2,41 @@
 
 Scripts for automatic orthology assignment, proves.
 
+## Pipeline
+
+Steps:
+
+0. Create phylogeny somehow.
+
+1. **`findog_s01_ETEnet_v03_27set19.py`** (Python 3.5.5): takes as input a newick phylogeny and identifies speciation events using `ete`. Then, it creates a network-like table of phylogeny nodes (leaves) that appeared via the same speciation event (using various species overlap score thresholds). Each table entry is a pair of `in_seqs` and `out_seqs`, like this:
+```
+seq1	seq2	S	100.0	0.01
+seq1	seq3	S	100.0	0.01
+...
+```
+```
+findog_s01_ETEnet_v03_27set19.py <input newick> <output prefix>
+```
+
+2. **`findog_s02_tabulate_v01.R`** (R 3.6.1): Assign each component of this network of orthologs to one or more orthogroups. In `R`?
+
+Required inputs:
+
+* phylogeny, newick. Should include supports.
+* dictionary linking specific sequences from one specie (or more?) to gene names (orthogroups that'll be tabulated)
+* list of species to create report (so as to include also species that are not present in the phylogeny).
+
+Final outputs (maybe):
+
+* table of ortholog presence/absence per species, or table of counts (including inparalogs?)
+* table of ortholog support per species (branch support of the paralog with the highest support per species?)
+* lists of genes belonging to each cluster
+
 ## ETE3
-
-### Plan
-
-This is my plan, my only plan, the end.
-
-### Strategies
 
 Two strategies available [here](http://etetoolkit.org/docs/latest/tutorial/tutorial_phylogeny.html#detecting-evolutionary-events).
 
-#### Species overlap
+### Species overlap
 
 See [Huerta-Cepas 2007](https://genomebiology.biomedcentral.com/articles/10.1186/gb-2007-8-6-r109). 
 
@@ -30,7 +54,7 @@ Script `ete-proves/test_v02_speciesoverlap.py` implements this method with a tre
 D Anocul_ACUA003793-RA_2-103,Anomin_AMIN009728-RA_330-722 <====> Anocul_ACUA021577-RA_55-316
 ```
 
-#### Strict tree reconciliation
+### Strict tree reconciliation
 
 Too strict. It'll force the species tree onto every possible subtree and add putative losses; which looks great in theory but requires a degree of compliance between gene trees and species trees that is unreasonable even for single-copy gene families. Won't for large multigene families.
 
