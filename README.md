@@ -88,3 +88,27 @@ Problem: highly atomised for some reason! There's no way to tweak granularity.
 ## GeneRax
 
 Check [this](https://www.biorxiv.org/content/10.1101/779066v1).
+
+## Create orthogroups, alignments and trees
+
+First, run orthofinder:
+
+```bash
+orthofinder -t 4 -a 4 -M msa -S diamond -A mafft -T iqtree -f input/ -I 1.5 -s tree.newick -os    ### -os ensures that sequence files are created
+```
+
+Create `Alignments` and `Trees` folders:
+
+```bash
+mkdir input/Orthologes_XX/Alignments
+mkdir input/Orthologes_XX/Trees
+cd input/Orthologes_XX/Sequences
+```
+
+Run alignments and trees:
+
+```bash
+for i in *.fa ; do  if [ ! -f ../Alignments/${i%%.fa}.l.fa ]; then echo ${i%%.fa} ali ; mafft --localpair --reorder --maxiterate 1000 --thread 6 $i > ../Alignments/${i%%.fa}.l.fa ; fi ; if [ ! -f ../Fasttrees/${i%%.fa}.tree ] ; then echo ${i%%.fa} phy ;  fasttree -lg -quiet -cat 4 ../Alignments/${i%%.fa}.l.fa > ../Fasttrees/${i%%.fa}.tree ; fi  ; done
+```
+
+Then, find a way to combine this output with `ETE` + species overlap.
