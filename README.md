@@ -107,8 +107,18 @@ cd input/Orthologes_XX/Sequences
 
 Run alignments and trees:
 
+* Checks if orthogroups contain >1 seq (otherwise, alignment failes)
+* Runs mafft and fasttree (iqtree is too slow?)
+
 ```bash
-for i in *.fa ; do  if [ ! -f ../Alignments/${i%%.fa}.l.fa ]; then echo ${i%%.fa} ali ; mafft --localpair --reorder --maxiterate 1000 --thread 6 $i > ../Alignments/${i%%.fa}.l.fa ; fi ; if [ ! -f ../Fasttrees/${i%%.fa}.tree ] ; then echo ${i%%.fa} phy ;  fasttree -lg -quiet -cat 4 ../Alignments/${i%%.fa}.l.fa > ../Fasttrees/${i%%.fa}.tree ; fi  ; done
+for i in *.fa ; do if [ $(grep -c ">" $i) -gt 1 ] ; then if [ ! -f ../Alignments/${i%%.fa}.l.fa ]; then echo ${i%%.fa} ali ; mafft --localpair --reorder --maxiterate 1000 --thread 6 $i > ../Alignments/${i%%.fa}.l.fa 2> /dev/null ; fi ; if [ ! -f ../Fasttrees/${i%%.fa}.tree ] ; then echo ${i%%.fa} phy ;  fasttree -lg -quiet -cat 4 ../Alignments/${i%%.fa}.l.fa > ../Fasttrees/${i%%.fa}.tree ; fi ; fi ; done
 ```
 
 Then, find a way to combine this output with `ETE` + species overlap.
+
+* Currently, script in `orthofinder_Ano14sp`.
+* Runs `ETE` + species overlap and finds clusters with `MCL` (inflation 1.5).
+
+```bash
+python findog_s01_ETEmcl_v07_10oct19.py /home/xavi/dades/Anotacions/orthofinder_Ano14sps_noclu_9oct19/output/Fasttrees out10oct19
+```
