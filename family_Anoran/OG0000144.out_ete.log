@@ -1,0 +1,11 @@
+2019-10-10 14:10:43,651 [INFO ]	Phylogeny = OG0000144.tree
+2019-10-10 14:10:43,651 [INFO ]	Nodes = 36
+2019-10-10 14:10:43,651 [INFO ]	Tree is unrooted, apply midpoint root
+2019-10-10 14:10:43,681 [INFO ]	Species overlap score = 0.00, num speciation events = 147
+2019-10-10 14:10:43,709 [INFO ]	Species overlap score = 0.01, num speciation events = 147
+2019-10-10 14:10:43,735 [INFO ]	Species overlap score = 0.05, num speciation events = 147
+2019-10-10 14:10:43,763 [INFO ]	Species overlap score = 0.10, num speciation events = 176
+2019-10-10 14:10:43,790 [INFO ]	Species overlap score = 0.50, num speciation events = 310
+2019-10-10 14:10:43,792 [INFO ]	Num nodes = 36
+2019-10-10 14:10:43,792 [INFO ]	Num species = 14
+2019-10-10 14:10:43,792 [INFO ]	Done!

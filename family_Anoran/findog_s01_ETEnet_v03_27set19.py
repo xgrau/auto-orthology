@@ -6,12 +6,12 @@ import pandas as pd
 import logging
 
 # input variables
-phy_fn = "OG0000000.tree"
+# phy_fn = "OG0000000.tree"
 # out_fn = "set_raxml.out_ete"
-# phy_fn = sys.argv[1]
+phy_fn = sys.argv[1]
 out_fn = "%s.out_ete" % phy_fn.split(sep=".")[0]
 overlap_threshods = [0,0.01,0.05,0.1,0.5]
-overlap_threshods = [0]
+#overlap_threshods = [0]
 
 # logging
 logging.basicConfig(
