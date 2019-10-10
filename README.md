@@ -122,3 +122,5 @@ Then, find a way to combine this output with `ETE` + species overlap.
 ```bash
 python findog_s01_ETEmcl_v07_10oct19.py /home/xavi/dades/Anotacions/orthofinder_Ano14sps_noclu_9oct19/output/Fasttrees out10oct19
 ```
+
+Now, parse with `phytools`: <http://www.phytools.org/eqg2015/asr.html>
