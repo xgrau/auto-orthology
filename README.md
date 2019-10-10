@@ -84,3 +84,7 @@ Parameters:
 * `-d` delimiter, default is `|`, but if you use `_` it seems to work fine (even if there are more than one such characters per name)
 
 Problem: highly atomised for some reason! There's no way to tweak granularity.
+
+## GeneRax
+
+Check [this](https://www.biorxiv.org/content/10.1101/779066v1).
