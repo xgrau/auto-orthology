@@ -9,12 +9,14 @@ Steps:
 0. Create phylogeny somehow.
 
 1. **`findog_s01_ETEnet_v03_27set19.py`** (Python 3.5.5): takes as input a newick phylogeny and identifies speciation events using `ete`. Then, it creates a network-like table of phylogeny nodes (leaves) that appeared via the same speciation event (using various species overlap score thresholds). Each table entry is a pair of `in_seqs` and `out_seqs`, like this:
-```
+
+```bash
 seq1	seq2	S	100.0	0.01
 seq1	seq3	S	100.0	0.01
 ...
 ```
-```
+
+```bash
 findog_s01_ETEnet_v03_27set19.py <input newick> <output prefix>
 ```
 
@@ -49,8 +51,7 @@ Script `ete-proves/test_v02_speciesoverlap.py` implements this method with a tre
 * All identified events make sense (paralogs, orthologs) for ADAR.
 * False negatives?
 
-
-```
+```bash
 D Anocul_ACUA003793-RA_2-103,Anomin_AMIN009728-RA_330-722 <====> Anocul_ACUA021577-RA_55-316
 ```
 
@@ -64,13 +65,13 @@ Too strict. It'll force the species tree onto every possible subtree and add put
 
 1. Download UPHO:
 
-```
+```bash
 git clone https://github.com/ballesterus/UPhO.git
 ```
 
 2. Run UPHO:
 
-```
+```bash
 python2 /home/xavi/Programes/UPhO/UPhO.py -d _ -in tree/adar.newick -iP -ouT
 ```
 
