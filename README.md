@@ -100,9 +100,9 @@ orthofinder -t 4 -a 4 -M msa -S diamond -A mafft -T iqtree -f input/ -I 1.5 -s t
 Create `Alignments` and `Trees` folders:
 
 ```bash
-mkdir input/Orthologes_XX/Alignments
-mkdir input/Orthologes_XX/Trees
 cd input/Orthologes_XX/Sequences
+mkdir ../Alignments
+mkdir ../Trees
 ```
 
 Run alignments and trees:
