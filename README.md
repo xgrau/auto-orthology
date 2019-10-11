@@ -123,4 +123,10 @@ Then, find a way to combine this output with `ETE` + species overlap.
 python findog_s01_ETEmcl_v07_10oct19.py /home/xavi/dades/Anotacions/orthofinder_Ano14sps_noclu_9oct19/output/Fasttrees out10oct19
 ```
 
+Obtain species tree with distances, using single-copy orthologs:
+
+```bash
+while read s; do echo ">$s" ; for i in $(cat SingleCopyOrthogroups.txt) ; do sed "s/\(>[^_]\)*_.*/\1/" Alignments/${i}.lt.fa | bioawk -c fastx '{ print $1,$2 }' | grep "^$s" | cut -f2 ; done   ; done < ../tree.list  > ../tree_dists.ali.fasta ; iqtree -g ../tree.newick.unroot -m LG+G4 -s ../tree_dists.ali.fasta -pre ../tree_dists.iqt -redo
+```
+
 Now, parse with `phytools`: <http://www.phytools.org/eqg2015/asr.html>

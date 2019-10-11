@@ -1,6 +1,7 @@
 # libraries
 import sys
 import os
+import fnmatch
 import numpy as np
 import scipy as sp
 import pandas as pd
@@ -10,16 +11,16 @@ import logging
 import networkx
 
 # input variables
-phy_fo = sys.argv[1]
-out_fn = sys.argv[2]
-#phy_fo = "output/Fasttrees/"
-#out_fn = "ara"
-phy_li = os.listdir(phy_fo)
+phy_fo = sys.argv[1] # folder with phylogenies
+out_fn = sys.argv[2] # output prefix
+phy_su = sys.argv[3] # suffix of newick trees (e.g. "newick" if "XXX.newick")
+
+# list of trees
+phy_li = fnmatch.filter(os.listdir(phy_fo), '*.%s' % phy_su)
 phy_li = np.sort(phy_li)
 
 # inflation for MCL clustering
 inf = 1.5
-
 
 # logging
 logging.basicConfig(
@@ -103,7 +104,6 @@ for phi in phy_li:
 
 	evou_d = pd.DataFrame(evou).dropna()
 	evou_d.columns = ["in_gene","out_gene","branch_support","ev_type","sos"]
-
 
 	if len(evou_d) > 1:
 

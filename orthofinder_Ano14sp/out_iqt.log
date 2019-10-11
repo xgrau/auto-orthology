@@ -1,0 +1,91 @@
+2019-10-11 13:58:21,108 [INFO ]	OG0000000 num nodes = 238
+2019-10-11 13:58:21,110 [INFO ]	OG0000000 Tree is rooted, pass
+2019-10-11 13:58:21,292 [INFO ]	OG0000000 Create network
+2019-10-11 13:58:21,299 [INFO ]	OG0000000 MCL clustering, optimal inflation = 1.500000 (max Q modularity)
+2019-10-11 13:58:21,349 [INFO ]	OG0000000 MCL clustering, num clusters = 24
+2019-10-11 13:58:21,351 [INFO ]	OG0000000 MCL clustering, num clustered genes = 232
+2019-10-11 13:58:21,381 [INFO ]	OG0000001 num nodes = 227
+2019-10-11 13:58:21,383 [INFO ]	OG0000001 Tree is rooted, pass
+2019-10-11 13:58:21,573 [INFO ]	OG0000001 Create network
+2019-10-11 13:58:21,581 [INFO ]	OG0000001 MCL clustering, optimal inflation = 1.500000 (max Q modularity)
+2019-10-11 13:58:21,634 [INFO ]	OG0000001 MCL clustering, num clusters = 22
+2019-10-11 13:58:21,636 [INFO ]	OG0000001 MCL clustering, num clustered genes = 225
+2019-10-11 13:58:21,645 [INFO ]	OG0000002 num nodes = 185
+2019-10-11 13:58:21,647 [INFO ]	OG0000002 Tree is rooted, pass
+2019-10-11 13:58:21,785 [INFO ]	OG0000002 Create network
+2019-10-11 13:58:21,789 [INFO ]	OG0000002 MCL clustering, optimal inflation = 1.500000 (max Q modularity)
+2019-10-11 13:58:21,817 [INFO ]	OG0000002 MCL clustering, num clusters = 49
+2019-10-11 13:58:21,819 [INFO ]	OG0000002 MCL clustering, num clustered genes = 163
+2019-10-11 13:58:21,829 [INFO ]	OG0000003 num nodes = 182
+2019-10-11 13:58:21,831 [INFO ]	OG0000003 Tree is rooted, pass
+2019-10-11 13:58:21,969 [INFO ]	OG0000003 Create network
+2019-10-11 13:58:22,028 [INFO ]	OG0000003 MCL clustering, optimal inflation = 1.500000 (max Q modularity)
+2019-10-11 13:58:22,057 [INFO ]	OG0000003 MCL clustering, num clusters = 3
+2019-10-11 13:58:22,059 [INFO ]	OG0000003 MCL clustering, num clustered genes = 177
+2019-10-11 13:58:22,068 [INFO ]	OG0000004 num nodes = 171
+2019-10-11 13:58:22,070 [INFO ]	OG0000004 Tree is rooted, pass
+2019-10-11 13:58:22,195 [INFO ]	OG0000004 Create network
+2019-10-11 13:58:22,202 [INFO ]	OG0000004 MCL clustering, optimal inflation = 1.500000 (max Q modularity)
+2019-10-11 13:58:22,233 [INFO ]	OG0000004 MCL clustering, num clusters = 49
+2019-10-11 13:58:22,235 [INFO ]	OG0000004 MCL clustering, num clustered genes = 153
+2019-10-11 13:58:22,243 [INFO ]	OG0000005 num nodes = 150
+2019-10-11 13:58:22,245 [INFO ]	OG0000005 Tree is rooted, pass
+2019-10-11 13:58:22,355 [INFO ]	OG0000005 Create network
+2019-10-11 13:58:22,359 [INFO ]	OG0000005 MCL clustering, optimal inflation = 1.500000 (max Q modularity)
+2019-10-11 13:58:22,382 [INFO ]	OG0000005 MCL clustering, num clusters = 17
+2019-10-11 13:58:22,385 [INFO ]	OG0000005 MCL clustering, num clustered genes = 140
+2019-10-11 13:58:22,393 [INFO ]	OG0000006 num nodes = 143
+2019-10-11 13:58:22,394 [INFO ]	OG0000006 Tree is rooted, pass
+2019-10-11 13:58:22,499 [INFO ]	OG0000006 Create network
+2019-10-11 13:58:22,504 [INFO ]	OG0000006 MCL clustering, optimal inflation = 1.500000 (max Q modularity)
+2019-10-11 13:58:22,521 [INFO ]	OG0000006 MCL clustering, num clusters = 1
+2019-10-11 13:58:22,523 [INFO ]	OG0000006 MCL clustering, num clustered genes = 143
+2019-10-11 13:58:22,530 [INFO ]	OG0000007 num nodes = 77
+2019-10-11 13:58:22,531 [INFO ]	OG0000007 Tree is rooted, pass
+2019-10-11 13:58:22,587 [INFO ]	OG0000007 Create network
+2019-10-11 13:58:22,589 [INFO ]	OG0000007 MCL clustering, optimal inflation = 1.500000 (max Q modularity)
+2019-10-11 13:58:22,602 [INFO ]	OG0000007 MCL clustering, num clusters = 10
+2019-10-11 13:58:22,605 [INFO ]	OG0000007 MCL clustering, num clustered genes = 64
+2019-10-11 13:58:22,612 [INFO ]	OG0000008 num nodes = 124
+2019-10-11 13:58:22,613 [INFO ]	OG0000008 Tree is rooted, pass
+2019-10-11 13:58:22,702 [INFO ]	OG0000008 Create network
+2019-10-11 13:58:22,708 [INFO ]	OG0000008 MCL clustering, optimal inflation = 1.500000 (max Q modularity)
+2019-10-11 13:58:22,724 [INFO ]	OG0000008 MCL clustering, num clusters = 1
+2019-10-11 13:58:22,726 [INFO ]	OG0000008 MCL clustering, num clustered genes = 124
+2019-10-11 13:58:22,734 [INFO ]	OG0000009 num nodes = 122
+2019-10-11 13:58:22,735 [INFO ]	OG0000009 Tree is rooted, pass
+2019-10-11 13:58:22,826 [INFO ]	OG0000009 Create network
+2019-10-11 13:58:22,829 [INFO ]	OG0000009 MCL clustering, optimal inflation = 1.500000 (max Q modularity)
+2019-10-11 13:58:22,852 [INFO ]	OG0000009 MCL clustering, num clusters = 15
+2019-10-11 13:58:22,854 [INFO ]	OG0000009 MCL clustering, num clustered genes = 91
+2019-10-11 13:58:22,862 [INFO ]	OG0000010 num nodes = 110
+2019-10-11 13:58:22,863 [INFO ]	OG0000010 Tree is rooted, pass
+2019-10-11 13:58:22,943 [INFO ]	OG0000010 Create network
+2019-10-11 13:58:22,947 [INFO ]	OG0000010 MCL clustering, optimal inflation = 1.500000 (max Q modularity)
+2019-10-11 13:58:22,973 [INFO ]	OG0000010 MCL clustering, num clusters = 8
+2019-10-11 13:58:22,975 [INFO ]	OG0000010 MCL clustering, num clustered genes = 102
+2019-10-11 13:58:22,983 [INFO ]	OG0000011 num nodes = 106
+2019-10-11 13:58:22,984 [INFO ]	OG0000011 Tree is rooted, pass
+2019-10-11 13:58:23,058 [INFO ]	OG0000011 Create network
+2019-10-11 13:58:23,062 [INFO ]	OG0000011 MCL clustering, optimal inflation = 1.500000 (max Q modularity)
+2019-10-11 13:58:23,096 [INFO ]	OG0000011 MCL clustering, num clusters = 7
+2019-10-11 13:58:23,098 [INFO ]	OG0000011 MCL clustering, num clustered genes = 104
+2019-10-11 13:58:23,104 [INFO ]	OG0000012 num nodes = 97
+2019-10-11 13:58:23,105 [INFO ]	OG0000012 Tree is rooted, pass
+2019-10-11 13:58:23,174 [INFO ]	OG0000012 Create network
+2019-10-11 13:58:23,176 [INFO ]	OG0000012 MCL clustering, optimal inflation = 1.500000 (max Q modularity)
+2019-10-11 13:58:23,192 [INFO ]	OG0000012 MCL clustering, num clusters = 14
+2019-10-11 13:58:23,194 [INFO ]	OG0000012 MCL clustering, num clustered genes = 87
+2019-10-11 13:58:23,202 [INFO ]	OG0000013 num nodes = 99
+2019-10-11 13:58:23,203 [INFO ]	OG0000013 Tree is rooted, pass
+2019-10-11 13:58:23,273 [INFO ]	OG0000013 Create network
+2019-10-11 13:58:23,276 [INFO ]	OG0000013 MCL clustering, optimal inflation = 1.500000 (max Q modularity)
+2019-10-11 13:58:23,303 [INFO ]	OG0000013 MCL clustering, num clusters = 10
+2019-10-11 13:58:23,305 [INFO ]	OG0000013 MCL clustering, num clustered genes = 97
+2019-10-11 13:58:23,311 [INFO ]	OG0000014 num nodes = 98
+2019-10-11 13:58:23,312 [INFO ]	OG0000014 Tree is rooted, pass
+2019-10-11 13:58:23,382 [INFO ]	OG0000014 Create network
+2019-10-11 13:58:23,385 [INFO ]	OG0000014 MCL clustering, optimal inflation = 1.500000 (max Q modularity)
+2019-10-11 13:58:23,408 [INFO ]	OG0000014 MCL clustering, num clusters = 10
+2019-10-11 13:58:23,410 [INFO ]	OG0000014 MCL clustering, num clustered genes = 93
+2019-10-11 13:58:23,415 [INFO ]	All done in /home/xavi/dades/Anotacions/orthofinder_Ano14sps_noclu_9oct19/output/Trees/

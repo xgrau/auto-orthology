@@ -1,127 +1,178 @@
 # libraries
+library(ape)
 library(phytools)
 library(scales)
+library(stringr)
+library(reshape2)
 
 #### Input ####
 # input parmeters
-tau_fn = "orthofinder_Ano14sp/Orthogroups.GeneCount.csv"
-phy_fn = "family_SET/set_raxml.out_ete.nodes"
-dic_fn = "family_SET/set_Hsap_names.dict"
-man_fn = "family_SET/set_manualclass.pb.csv"
-# input parmeters
-# edg_fn = "family_ADAR/adar.out_ete.sos_0.00.edges"
-# nod_fn = "family_ADAR/adar.out_ete.nodes"
-# dic_fn = "family_ADAR/adar.dict"
-sup_th = 0
+tau_fn = "out_fas.csv"
+phy_fn = "tree_dists.iqt.treefile"
+ref_sp = "Anogam"
 
 
-# load data
-edg = read.table(edg_fn, header = T)
-nod = read.table(nod_fn, header = T)
-dic = read.table(dic_fn, header = T)
-man = read.table(man_fn, header = T)
+#### Phylogeny ####
+phy = ape::read.tree(phy_fn) 
+phy_unrooted = ape::unroot(phy)
+write.tree(phy = phy_unrooted, file = paste(phy_fn,"unroot", sep="."))
 
-#### Graph info ####
-# is node in reference dict?
-nod[nod$gene %in% as.character(dic$gene),"ref"]  = "ref"
-nod[!nod$gene %in% as.character(dic$gene),"ref"] = "not"
-nod = merge(nod,dic, by.x = "gene", by.y = "gene", all.x=T)
+#### Orthogroups ####
+# load orthogroups
+tau         = read.table(tau_fn, header = T, sep = "\t")
+tau         = tau[!is.na(tau$cluster),]
+tau$node    = as.character(tau$node)
+tau$species = stringr::str_extract(tau$node, pattern = "^[^_]*")
 
+# gene counts per orthogroup
+tac = aggregate(tau$cluster, by = list(tau$species,tau$og_cluster), FUN=length)
+colnames(tac) = c("species", "og_cluster","num_genes")
+# wide table
+taw = dcast(tac, og_cluster ~ species, value.var="num_genes")
+rownames(taw) = taw$og_cluster
+taw = taw[,phy$tip.label]
+# binarise table (presence/absence)
+taw[is.na(taw)] = 0
+taw[taw>1]      = 1
 
-
-# remove edges with suppor under threshold
-edg = edg[edg$branch_support >= sup_th,]
-
-# create network
-net = graph_from_data_frame(edg, vertices = nod, directed = F)
-net_layout_mds = layout_with_mds(net) # MDS layout
-net_layout_nic = layout_components(net) # nice layout
-
-# add gene names as labels, colors and sizes for nodes
-V(net)$label = as.character(nod$gene)
-net_nod_siz = c(ref = 2, not = 1) # node sizes
-net_nod_col = c(ref = "blue", not = "slategray4") # node colors
-igraph::V(net)$color = net_nod_col[igraph::V(net)$ref]
-igraph::V(net)$size  = net_nod_siz[igraph::V(net)$ref]
-
-# plot igraph
-pdf(paste(edg_fn,".network.pdf",sep=""),height=5,width=5)
-plot.igraph(net, 
-            vertex.label=V(net)$family,
-            vertex.label.family="sans", vertex.frame.color=NA, vertex.label.cex=0.7,
-            edge.color = alpha("slategray3",0.5),
-            layout=net_layout_mds)
-plot.igraph(net, 
-            vertex.label=V(net)$family,
-            vertex.label.family="sans", vertex.frame.color=NA, vertex.label.cex=0.7,
-            edge.color = alpha("slategray3",0.5),
-            layout=net_layout_nic)
-dev.off()
+# identify reference species
+lis_ogs = rownames(taw)
+lis_ref = tau[tau$og_cluster %in% lis_ogs ,"node"] # TODO: this should identify one ref sequence per orthogroup, from the ref sps
 
 
 
-#### Assign families ####
-# find components
 
-# assign family (same as ref sequence with which it is sharing component)
-# PROBLEMATIC: SAME SEQ CAN SHARE COMPONENT WITH MORE THAN ONE REF
-# for (rei in 1:length(nod_ref$component)) {
-#   nod[nod$component == nod_ref[rei,"component"], "family_inferred"] = nod_ref[rei,"family"]  
-# }
+#### Loop ogs ####
 
-# identify all families each seq is linked to (by orthology)
-for (noi in 1:nrow(nod)) {
-  noi_bool = nod[noi,"gene"] == edg$in_gene | nod[noi,"gene"] == edg$out_gene
-  noi_comp_elements = unique(c(as.character(edg[noi_bool,c("in_gene")]),as.character(edg[noi_bool,c("out_gene")])))
-  noi_comp_refvec   = as.character(dic[dic$gene %in% noi_comp_elements,"family"])
-  noi_comp_refstr   = paste(noi_comp_refvec, collapse = ',')
-  nod[noi,"family_inferred"] = noi_comp_refstr
-}
-
-nod$family_inferred_factor= as.factor(nod$family_inferred)
-factor_colors = c("slategray4",
-                  "red1","red4","purple1","purple4",
-                  "blue1","blue4","olivedrab1","olivedrab4",
-                  "darkgreen","orange1","orange3",
-                  "cyan4","cyan2","gold","limegreen",
-                  "violetred1","violetred4",
-                  "springgreen1","springgreen4",
-                  "slateblue2","slateblue4","sienna2","sienna4",
-                  "paleturquoise1","paleturquoise4")
-faminf_colors = factor_colors[nod$family_inferred_factor]
-
-# replot, with lots of colors
-V(net)$color = faminf_colors
-pdf(paste(edg_fn,".network_colorfams.pdf",sep=""),height=5,width=5)
-plot.igraph(net, 
-            vertex.label=V(net)$family,vertex.size=2,
-            vertex.label.family="sans", vertex.frame.color=NA, vertex.label.cex=0.7,
-            edge.color = alpha("slategray3",0.5),
-            layout=net_layout_mds)
-plot.igraph(net, 
-            vertex.label=V(net)$family,vertex.size=2,
-            vertex.label.family="sans", vertex.frame.color=NA, vertex.label.cex=0.7,
-            edge.color = alpha("slategray3",0.5),
-            layout=net_layout_nic)
-legend("topright", legend = levels(nod$family_inferred_factor), col=factor_colors, pch=20, cex=0.3, bty = "n")
-dev.off()
+n = sample(1:nrow(taw), 1)
 
 
-#### Compare manual ####
-# compare with manual results
-source("helper_scripts/geneSetAnalysis.R")
-pdf(paste(edg_fn,".venns.pdf",sep=""),height=4,width=4)
-for (rei in 1:nrow(dic)) {
-  man_list = as.character(man[man$family          == dic[rei,"family"],"gene"])
-  nod_list = as.character(nod[nod$family_inferred == dic[rei,"family"],"gene"])
-  nod_list = nod_list[!is.na(nod_list)]
-  
-  # plot venn
-  # TODO: report lists of intersections, disjoint, etc. (in ven object!)
-  ven = venn.two(list1 = nod_list , list2 = man_list, catname1 = "inferred", catname2 = "manual", main = as.character(dic[rei,"family"]))
-  
-}
-dev.off()
+# phy$edge.length = rep(0.01,length(phy$edge)/2)
+# n = sample(1:nrow(taw), 1)
+n = 13662
+print(n)
+phy_states = factor(as.numeric(taw[n,]))
+# levels(phy_states) = c(1,0)
+names(phy_states) = colnames(taw)
+
+# ancestral reconstruction
+ans = ape::ace(phy_states, phy, type = "d", method = "ML")
+
+# plot
+plot(phy, type = "phy", use.edge.length = FALSE, label.offset = 1, main=rownames(taw)[n])
+co = c("lightblue", "blue")
+tiplabels(pch = 21, bg = co[as.numeric(phy_states)], cex = 2, adj = 1)
+nodelabels(pie = ans$lik.anc, piecol = co, cex = 0.75)
+nodelabels(signif(ans$lik.anc[,"1"],3), cex = 0.75, col="red", frame="none")
+# http://www.phytools.org/eqg2015/asr.html
 
 
-# hist(table(net_components$membership))
+
+stop("ara")
+
+#### HOW TO OBTAIN GENOME-WIDE TRANSITION RATES?
+Q = matrix(c(-1,1,1,-1),2,2) # transition matrix
+colnames(Q) = c(0,1)
+rownames(Q) = c(0,1)
+
+phy_sim     = sim.history(phy,Q)
+phy_sim_map = make.simmap(phy, phy_states, nsim = 100)
+phy_sim_den = densityMap(phy_sim_map,lwd=3,outline=TRUE)
+
+
+
+
+
+
+
+
+stop("AREA")
+
+
+
+
+
+
+# phy$node.states = phy_states
+dotTree(phy, phy_states)
+# plotTree.barplot(phy, phy_states, args.barplot = list(col="slategray",border=NA))
+
+
+phy$edge.length =0.1
+ace(taw[1:1000,], phy, type = "discrete", method = "ML")
+fastAnc(phy, phy_states, vars=F)
+
+
+# phy_states = t(taw[c(1:10),])
+# dotTree(phy, phy_states)
+# plotTree.barplot(phy, phy_states)
+# phylo.heatmap(phy, phy_states)
+# getStates(phy)
+
+phy = make.simmap(phy,phy_states,nsim=100)
+
+plotTree(phy, ftype="i")
+
+
+Q<-matrix(c(-1,1,1,-1),2,2)
+rownames(Q)<-colnames(Q)<-c(0,1)
+phy<-sim.history(phy,Q)
+
+phy$tip.label
+
+
+# tree
+anole.tree<-read.tree("http://www.phytools.org/eqg2015/data/anole.tre")
+## plot tree
+plotTree(anole.tree,type="fan",ftype="i")
+
+svl<-read.csv("http://www.phytools.org/eqg2015/data/svl.csv",
+              row.names=1)
+svl<-as.matrix(svl)[,1]
+
+fit<-fastAnc(anole.tree,svl,vars=TRUE,CI=TRUE)
+
+
+tree<-read.tree("tree.tre")
+x<-as.matrix(read.csv("x.csv",row.names=1))[,1]
+
+dotTree(tree,x,length=10,ftype="i")
+plotTree.barplot(tree,x)
+
+
+
+#### ACE
+library(ape)
+
+phy
+
+
+
+plot(phy)
+x <- factor(c(rep(0, 5), rep(1, 9)))
+ans = ace(phy_states, phy, type = "d")
+plot(phy, type = "c", FALSE, label.offset = 1)
+co <- c("blue", "yellow")
+tiplabels(pch = 22, bg = co[as.numeric(phy_states)], cex = 2, adj = 1)
+nodelabels(thermo = ans$lik.anc, piecol = co, cex = 0.75)
+
+
+
+
+data(bird.orders)
+bird.orders$tip.label
+x <- factor(c(rep(0, 5), rep(1, 18)))
+ans <- ace(x, bird.orders, type = "d")
+
+#### Showing the likelihoods on each node:
+plot(bird.orders, type = "c", FALSE, label.offset = 1)
+co <- c("blue", "yellow")
+tiplabels(pch = 22, bg = co[as.numeric(x)], cex = 2, adj = 1)
+nodelabels(thermo = ans$lik.anc, piecol = co, cex = 0.75)
+
+# continuous
+x <- rnorm(23)
+ace(x, bird.orders)
+
+
+
