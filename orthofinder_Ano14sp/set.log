@@ -1,7 +1,0 @@
-2019-10-11 13:50:48,515 [INFO ]	set_raxml num nodes = 2449
-2019-10-11 13:50:48,534 [INFO ]	set_raxml Tree is rooted, pass
-2019-10-11 13:50:50,820 [INFO ]	set_raxml Create network
-2019-10-11 13:50:51,021 [INFO ]	set_raxml MCL clustering, optimal inflation = 1.500000 (max Q modularity)
-2019-10-11 13:50:51,585 [INFO ]	set_raxml MCL clustering, num clusters = 48
-2019-10-11 13:50:51,589 [INFO ]	set_raxml MCL clustering, num clustered genes = 2442
-2019-10-11 13:50:51,646 [INFO ]	All done in /home/xavi/Documents/auto-orthology/family_SET/tree/

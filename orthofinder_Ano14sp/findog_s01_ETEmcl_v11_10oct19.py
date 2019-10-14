@@ -51,7 +51,6 @@ ort.columns = ["og","node"]
 # list of orthogroups
 ort_lis = np.unique(ort["og"])
 
-
 # find optimal inflation for MCL
 def optimise_inflation(matrix, start=1.1, end=2.5, step=0.1):
 	I_lis = np.arange(start, end, step).tolist()
@@ -164,7 +163,7 @@ for phi in ort_lis:
 			#mcl_c_out = ort[ort["og"] == phy_id]
 			mcl_c_out = pd.DataFrame( { 
 				"node"    : ort[ort["og"] == phy_id]["node"].values,
-				"cluster" : np.nan
+				"cluster" : int(0)
 			}, columns=["node","cluster"])
 			logging.info("%s No MCL clustering, num clusters = %i" % (phy_id, 1))
 			logging.info("%s No MCL clustering, num clustered genes = %i" % (phy_id, len(mcl_c_out)))
@@ -174,14 +173,18 @@ for phi in ort_lis:
 		logging.info("%s Can't find phylogeny (small orthogroup?), output original clusters instead" % phy_id)
 		mcl_c_out = pd.DataFrame( { 
 			"node"    : ort[ort["og"] == phy_id]["node"].values,
-			"cluster" : np.nan
+			"cluster" : int(0)
 		}, columns=["node","cluster"])
 		logging.info("%s No phylogeny, num clusters = %i" % (phy_id, 1))
 		logging.info("%s No phylogeny, num clustered genes = %i" % (phy_id, len(mcl_c_out)))
 	
 	# create dataframe with old and new clusters, and all genes
-	out_d = pd.DataFrame( { "node" : phy_seq , "og" : phy_id } )
-	out_d = pd.merge(out_d, mcl_c_out, how="outer", on="node", )
+	out_d = ort[ort["og"] == phy_id]
+	# pd.DataFrame( { 
+	# 	"node" : ort[ort["og"] == phy_id]["node"].values ,
+	# 	 "og" : phy_id
+	# 	} )
+	out_d = pd.merge(out_d, mcl_c_out, how="outer", on="node")
 	out_d["og_cluster"] = out_d["og"] +"_"+ out_d["cluster"].astype(str)
 	# save clusters
 	if phi_n == 1 : 
