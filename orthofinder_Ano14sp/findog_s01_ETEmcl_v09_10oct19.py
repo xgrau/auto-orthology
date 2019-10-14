@@ -9,18 +9,27 @@ import ete3
 import markov_clustering
 import logging
 import networkx
+import argparse
+
+# argument parser
+arp = argparse.ArgumentParser()
+
+# Add the arguments to the parser
+arp.add_argument("-p", "--phy", required=True, help="folder with phylogenies")
+arp.add_argument("-s", "--suf", required=True, help="suffix of phylogenies in folder")
+arp.add_argument("-o", "--out", required=True, help="prefix for output")
+arp.add_argument("-t", "--ogt", required=True, help="Orthology.txt table-like file produced by orthofinder")
+arl = vars(arp.parse_args())
 
 # input variables
-phy_fo = sys.argv[1] # folder with phylogenies
-out_fn = sys.argv[2] # output prefix
-phy_su = sys.argv[3] # suffix of newick trees (e.g. "newick" if "XXX.newick")
-
-# list of trees
-phy_li = fnmatch.filter(os.listdir(phy_fo), '*.%s' % phy_su)
-phy_li = np.sort(phy_li)
-
-# inflation for MCL clustering
-inf = 1.5
+# phy_fo = sys.argv[1] # folder with phylogenies
+# phy_su = sys.argv[2] # suffix of newick trees (e.g. "newick" if "XXX.newick")
+# out_fn = sys.argv[3] # output prefix
+# ort_fn = sys.argv[4] # path to Orthology.txt (to retrieve orthogroups that couldn't be analysed with phylogenies)
+phy_fo = arl["phy"]
+phy_su = arl["suf"]
+out_fn = arl["out"]
+ort_fn = arl["ogt"]
 
 # logging
 logging.basicConfig(
@@ -29,6 +38,17 @@ logging.basicConfig(
 	#handlers=[ logging.FileHandler("%s.log" % out_fn, mode="w"), logging.StreamHandler() ]
 	handlers=[ logging.FileHandler("%s.log" % out_fn, mode="w") ]
 	)
+
+# log input variables
+logging.info("Input args: %r", arl)
+
+# list of trees
+phy_li = fnmatch.filter(os.listdir(phy_fo), '*.%s' % phy_su)
+phy_li = np.sort(phy_li)
+
+# inflation for MCL clustering
+inf = 1.5
+
 
 # find optimal inflation for MCL
 def optimise_inflation(matrix, start=1.1, end=2.5, step=0.1):
