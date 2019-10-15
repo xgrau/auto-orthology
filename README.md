@@ -97,6 +97,13 @@ First, run orthofinder:
 orthofinder -t 4 -a 4 -M msa -S diamond -A mafft -T iqtree -f input/ -I 1.5 -s tree.newick -os    ### -os ensures that sequence files are created
 ```
 
+Create long-format orthofinder output:
+
+```bash
+awk '{ for (i=2; i <= NF; i++) { print $i"\t"$1  }}' Orthogroups_nomllarg.txt | sed "s/://" > Orthogroups_nomllarg_llarg.csv
+```
+
+
 Create `Alignments` and `Trees` folders:
 
 ```bash
@@ -107,7 +114,7 @@ mkdir ../Trees
 
 Run alignments and trees:
 
-* Checks if orthogroups contain >1 seq (otherwise, alignment failes)
+* Checks if orthogroups contain >1 seq (otherwise, alignment fails)
 * Runs mafft, trimal and fasttree (iqtree is too slow?)
 
 ```bash
