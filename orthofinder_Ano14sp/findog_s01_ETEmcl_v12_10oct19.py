@@ -32,7 +32,7 @@ out_fn = arl["out"]
 ort_fn = arl["ort"]
 ani    = arl["ani"]
 nopt   = int(arl["nopt"])
-inf    = int(arl["inf"])
+inf    = float(arl["inf"])
 
 # logging
 logging.basicConfig(
@@ -58,13 +58,12 @@ ort_lis = np.unique(ort["og"])
 def optimisation_loop(nopt=nopt):
 	
 	# loop through phylogenies
-	phi_n = 0
-	print(phi_n,"/",nopt)
+	n = 0
 	inf_lis = np.zeros(nopt)
 	mod_lis = np.zeros(nopt)
 
 	ort_ran = np.random.choice(ort_lis, size=nopt)
-	for phi in ort_ran:
+	for n,phi in enumerate(ort_ran):
 
 		# input name
 		phy_fn = "%s/%s.%s" % (phy_fo,phi,phy_su)
@@ -73,19 +72,16 @@ def optimisation_loop(nopt=nopt):
 		# cluster phylogeny if you can, retrieve original clusters if you can't
 		if os.path.exists(phy_fn):
 			evou_d = parse_phylo(phy_fn=phy_fn, phy_id=phy_id)
-			inf_lis[phi_n], mod_lis[phi_n] = clusters_opt(phy_fn=phy_fn, phy_id=phy_id, evou_d=evou_d)
+			inf_lis[n], mod_lis[n] = clusters_opt(phy_fn=phy_fn, phy_id=phy_id, evou_d=evou_d)
 		else:
-			inf_lis[phi_n] = np.nan 
-			mod_lis[phi_n] = np.nan
+			inf_lis[n] = np.nan 
+			mod_lis[n] = np.nan
 
-		# add counter
-		phi_n = phi_n + 1
-		if phi_n % int(nopt/20) == 0 : print(phi_n,"/",nopt)
+		# counter
+		if n % int(nopt/20) == 0 : print("#",n,"/",nopt)
 
 	# calculate means
-	print(phi_n,"/",nopt)
-	print("Mean inflation = %f | Median inflation = %f " % (np.nanmean(inf_lis), np.nanmedian(inf_lis)))
-	print("Mean modularity = %f | Median modularity = %f " % (np.nanmean(mod_lis), np.nanmedian(mod_lis)))
+	print("#",n,"/",nopt)
 	
 	return inf_lis, mod_lis
 
@@ -108,11 +104,9 @@ def optimise_inflation(matrix, start=1.1, end=2.5, step=0.1):
 def orthogroup_loop():
 
 	# loop through phylogenies
-	phi_n = 0
-	phi_l = len(ort_lis)
-	print(phi_n,"/",phi_l)
-
-	for phi in ort_lis:
+	n = 0
+	l = len(ort_lis)
+	for n,phi in enumerate(ort_lis):
 
 		# input name
 		phy_fn = "%s/%s.%s" % (phy_fo,phi,phy_su)
@@ -124,9 +118,9 @@ def orthogroup_loop():
 			if len(evou_d) > 1:
 				mcl_c_out = clusters_mcl(phy_fn=phy_fn, phy_id=phy_id, evou_d=evou_d)
 			else:
-				mcl_c_out = clusters_nophylo(phy_fn=phy_fn, phy_id=phy_id)
+				mcl_c_out = clusters_nophylo(phy_id=phy_id)
 		else:
-			mcl_c_out = clusters_nophylo(phy_fn=phy_fn, phy_id=phy_id)
+			mcl_c_out = clusters_nophylo(phy_id=phy_id)
 
 		# create dataframe with old and new clusters, and all genes
 		out_d = ort[ort["og"] == phy_id]
@@ -134,18 +128,17 @@ def orthogroup_loop():
 		out_d["og_cluster"] = out_d["og"] +"_"+ out_d["cluster"].astype(str)
 		
 		# save clusters
-		if phi_n == 0 : 
+		if n == 0 : 
 			out_d.to_csv("%s.orthology.csv" % out_fn, sep="\t", index=None, mode="w")
-		if phi_n > 0  : 
+		if n > 0  : 
 			out_d.to_csv("%s.orthology.csv" % out_fn, sep="\t", index=None, mode="a", header=False)
 	
 		# add counter
-		phi_n = phi_n + 1
-		if phi_l > 20:
-			if phi_n % int(phi_l/20) == 0 : print(phi_n,"/",phi_l)
+		if l > 20:
+			if n % int(l/20) == 0 : print("#",n,"/",l)
 
 	# end triumphantly
-	print(phi_n,"/",phi_l)
+	print("#",n,"/",l)
 
 
 # parse phylogenies with ETE to obtain a network-like table defining 
@@ -240,9 +233,9 @@ def clusters_mcl(phy_fn, phy_id, evou_d):
 
 # if the phylogeny can't be analysed with ETE (no phylogeny, not enough speciation events...), use
 # the original orthogroups from orthofinder instead
-def clusters_nophylo(phy_fn, phy_id):
+def clusters_nophylo(phy_id):
 
-	logging.info("%s Can't find phylogeny (small orthogroup?) OR can't perform MCL clusters (no speciations?), output original clusters instead" % phy_id)
+	logging.info("%s Can't find phylogeny (small orthogroup?) OR can't run MCL (no speciations?), output original clusters instead" % phy_id)
 	mcl_c_out = pd.DataFrame( { 
 		"node"    : ort[ort["og"] == phy_id]["node"].values,
 		"cluster" : np.nan
@@ -251,6 +244,9 @@ def clusters_nophylo(phy_fn, phy_id):
 	logging.info("%s No phylo/MCL, num clustered genes = %i" % (phy_id, len(mcl_c_out)))
 
 	return mcl_c_out
+
+
+
 
 
 ### MAIN ####
@@ -262,16 +258,20 @@ logging.info("Input args: %r", arl)
 if ani == "main":
 
 	# run orthologs loop
+	print("MODE: re-cluster orthogroups with ETE(SO)+MCL")
 	logging.info("Analyse orthogroups in %s" % (phy_fo))
 	orthogroup_loop()
+	print("DONE")
 
 elif ani == "opti":
 
 	# run optimisation loop
+	print("MODE: inflation optimisation with %i random phylogenies" % nopt)
 	logging.info("Find optimal inflation")
 	inf_lis, mod_lis = optimisation_loop(nopt=nopt)
 
 	# plot optimisation histograms
+	print("# median inflation is %f" % np.nanmedian(inf_lis))
 	with PdfPages('%s.optimise_inflation.pdf' % out_fn) as pdf:
 		# inflation
 		plt.figure(figsize=(4,3))
@@ -285,9 +285,12 @@ elif ani == "opti":
 		pdf.savefig(bbox_inches='tight')
 		# close pdf
 		plt.close()
+	
+	print("DONE")
 
 else: 
-	print("ERROR: specify analysis with -a/--ani")
+	print("ERROR: specify analysis with -a/--ani (main or opti)")
+	print("ERROR: see help with -h")
 
 # end
 logging.info("All done in %s" % (phy_fo))
