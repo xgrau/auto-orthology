@@ -415,7 +415,7 @@ if mod == "single":
 			print_attributes = ["cluster","cluster_ref"]
 		if do_print: 
 			print_tree(phy=phy, out="%s.orthologs.newick" % out_fn, evc=clu, attributes=print_attributes, sep="|")
-			os.system("nw_display %s.orthologs.newick -s -i visibility:hidden -d stroke:gray -b opacity:0 -w 1000 -v 12 > %s.orthologs.newick.svg" % (out_fn,out_fn))
+			os.system("nw_display %s.orthologs.newick -s -i visibility:hidden -d stroke:gray -b opacity:0 -w 2000 -v 12 > %s.orthologs.newick.svg" % (out_fn,out_fn))
 			os.system("inkscape %s.orthologs.newick.svg --export-pdf=%s.orthologs.newick.pdf 2> /dev/null" % (out_fn,out_fn))
 	else:
 		print("No speciations in tree %s %s" % (phy_id, phy_fo))
@@ -472,7 +472,7 @@ elif mod == "multi":
 					print_attributes = ["cluster","cluster_ref"]
 				if do_print: 
 					print_tree(phy=phy, out="%s.orthologs.newick" % out_fn, evc=clu, attributes=print_attributes, sep="|")
-					os.system("nw_display %s.orthologs.newick -s -i visibility:hidden -d stroke:gray -b opacity:0 -w 1000 -v 12 > %s.orthologs.newick.svg" % (out_fn,out_fn))
+					os.system("nw_display %s.orthologs.newick -s -i visibility:hidden -d stroke:gray -b opacity:0 -w 2000 -v 12 > %s.orthologs.newick.svg" % (out_fn,out_fn))
 					os.system("inkscape %s.orthologs.newick.svg --export-pdf=%s.orthologs.newick.pdf 2> /dev/null" % (out_fn,out_fn))
 			else:
 				clu = clusters_nomcl(oid=phy_id, ort=ort)
