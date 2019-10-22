@@ -1,0 +1,9 @@
+2019-10-22 17:29:50,676 [INFO ]	Input args: {'mode': 'single', 'refsp': None, 'split': '_', 'inf': 1.1, 'print': 'T', 'phy': 'set_family/bpcomp.con.tre', 'suf': 'newick', 'minbs': 0, 'sos': 0.0, 'root': 'F', 'pid': 'tree', 'out': 'posout_setbayes', 'nopt': 500, 'ort': None}
+2019-10-22 17:29:50,676 [INFO ]	MODE: find orthogroups in one phylogeny with ETE(SO)+MCL: set_family/bpcomp.con.tre
+2019-10-22 17:29:50,727 [INFO ]	tree num nodes = 2449
+2019-10-22 17:29:50,735 [INFO ]	tree Tree is unrooted, apply midpoint root
+2019-10-22 17:29:56,397 [INFO ]	tree Create network
+2019-10-22 17:29:56,492 [INFO ]	tree MCL clustering, inflation = 1.100000
+2019-10-22 17:30:00,690 [INFO ]	tree MCL clustering, num clusters = 242
+2019-10-22 17:30:00,694 [INFO ]	tree MCL clustering, num clustered genes = 2424
+2019-10-22 17:31:00,473 [INFO ]	All done in set_family/bpcomp.con.tre

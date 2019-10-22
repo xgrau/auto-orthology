@@ -1,0 +1,9 @@
+2019-10-22 17:32:32,432 [INFO ]	Input args: {'root': 'F', 'nopt': 500, 'mode': 'single', 'refsp': 'Hsap', 'suf': 'newick', 'inf': 1.1, 'ort': None, 'minbs': 0, 'phy': 'set_family/RAxML_bestTree.SETML36', 'print': 'T', 'pid': 'tree', 'out': 'posout_setraxmlr', 'sos': 0.0, 'split': '_'}
+2019-10-22 17:32:32,433 [INFO ]	MODE: find orthogroups in one phylogeny with ETE(SO)+MCL: set_family/RAxML_bestTree.SETML36
+2019-10-22 17:32:32,486 [INFO ]	tree num nodes = 2449
+2019-10-22 17:32:32,494 [INFO ]	tree Tree is unrooted, apply midpoint root
+2019-10-22 17:32:41,127 [INFO ]	tree Create network
+2019-10-22 17:32:41,304 [INFO ]	tree MCL clustering, inflation = 1.100000
+2019-10-22 17:32:45,747 [INFO ]	tree MCL clustering, num clusters = 147
+2019-10-22 17:32:45,751 [INFO ]	tree MCL clustering, num clustered genes = 2434
+2019-10-22 17:34:48,877 [INFO ]	All done in set_family/RAxML_bestTree.SETML36
