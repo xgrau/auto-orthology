@@ -1,0 +1,9 @@
+2019-10-23 10:30:07,195 [INFO ]	Input args: {'ort': None, 'phy': '/home/xavi/Dropbox/Dades/HistoneOUPUb3/HistoneModificationToolkit/Methylases/set/ml3/group1-1/RAxML_bestTree.SETGROUP15', 'print': 'T', 'refsp': 'Hsap', 'inf': 1.1, 'minbs': 0, 'pid': 'tree', 'out': 'set_family_groups/group1', 'root': 'F', 'split': '_', 'nopt': 500, 'suf': 'newick', 'mode': 'single', 'sos': 0.0}
+2019-10-23 10:30:07,195 [INFO ]	MODE: find orthogroups in one phylogeny with ETE(SO)+MCL: /home/xavi/Dropbox/Dades/HistoneOUPUb3/HistoneModificationToolkit/Methylases/set/ml3/group1-1/RAxML_bestTree.SETGROUP15
+2019-10-23 10:30:07,203 [INFO ]	tree num nodes = 316
+2019-10-23 10:30:07,204 [INFO ]	tree Tree is unrooted, apply midpoint root
+2019-10-23 10:30:07,352 [INFO ]	tree Create network
+2019-10-23 10:30:07,431 [INFO ]	tree MCL clustering, inflation = 1.100000
+2019-10-23 10:30:08,571 [INFO ]	tree MCL clustering, num clusters = 7
+2019-10-23 10:30:08,573 [INFO ]	tree MCL clustering, num clustered genes = 315
+2019-10-23 10:30:12,085 [INFO ]	All done in /home/xavi/Dropbox/Dades/HistoneOUPUb3/HistoneModificationToolkit/Methylases/set/ml3/group1-1/RAxML_bestTree.SETGROUP15
